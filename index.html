@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>plateau-building</title>
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.js"></script>
+</head>
+
+<body>
+  <div id="map" style="position:absolute;top:0;left:0;bottom:0;right:0;"></div>
+  <script>
+    const base = new URL("./", location.href).toString().replace(/\/$/, "");
+
+    new maplibregl.Map({
+      "container": "map",
+      "center": [139.677879, 35.647049],
+      "zoom": 17.35,
+      "pitch": 51,
+      "bearing": 18.7,
+      "hash": true,
+      "style": {
+        "version": 8,
+        "glyphs": "https://maps.gsi.go.jp/xyz/noto-jp/{fontstack}/{range}.pbf",
+        "sources": {
+          "pale": {
+            "type": "raster",
+            "tiles": [
+              "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"
+            ],
+            "minzoom": 5,
+            "maxzoom": 18,
+            "tileSize": 256
+          },
+          "plateau": {
+            "type": "vector",
+            "tiles": [
+              `${base}/{z}/{x}/{y}.pbf`
+            ],
+            "minzoom": 5,
+            "maxzoom": 14
+          }
+        },
+        "layers": [{
+          "id": "pale",
+          "type": "raster",
+          "source": "pale",
+          "minzoom": 5,
+          "maxzoom": 20
+        }, {
+          "id": "bldg",
+          "type": "fill-extrusion",
+          "source": "plateau",
+          "source-layer": "bldg",
+          "minzoom": 5,
+          "maxzoom": 20,
+          "paint": {
+            "fill-extrusion-color": "#008800",
+            "fill-extrusion-height": ["get", "measuredHeight"]
+          }
+        }]
+      }
+    });
+  </script>
+</body>
+
+</html>

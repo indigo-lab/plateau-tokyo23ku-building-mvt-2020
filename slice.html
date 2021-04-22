@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>plateau-building slice</title>
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.js"></script>
+</head>
+
+<body>
+  <div id="map" style="position:absolute;top:0;left:0;bottom:0;right:0;"></div>
+  <script>
+    const base = new URL("./", location.href).toString().replace(/\/$/, "");
+
+    const style = {
+      "version": 8,
+      "glyphs": "https://maps.gsi.go.jp/xyz/noto-jp/{fontstack}/{range}.pbf",
+      "sources": {
+        "pale": {
+          "type": "raster",
+          "tiles": [
+            "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"
+          ],
+          "minzoom": 5,
+          "maxzoom": 18,
+          "tileSize": 256,
+          "attribution": "<a href='http://maps.gsi.go.jp/development/ichiran.html'>地理院タイル</a>"
+        },
+        "plateau": {
+          "type": "vector",
+          "tiles": [
+            `${base}/{z}/{x}/{y}.pbf`
+          ],
+          "minzoom": 10,
+          "maxzoom": 16,
+          "attribution": "<a href='https://www.mlit.go.jp/plateau/'>国土交通省 Project PLATEAU</a> のデータを加工して作成"
+        }
+      },
+      "layers": [{
+        "id": "pale",
+        "type": "raster",
+        "source": "pale",
+        "minzoom": 5,
+        "maxzoom": 20
+      }]
+    };
+
+    for (let h = 0; h <= 300; h += 3) {
+      style.layers.push({
+        "id": `bldg${h}`,
+        "type": "fill-extrusion",
+        "source": "plateau",
+        "source-layer": "bldg",
+        "minzoom": 10,
+        "maxzoom": 20,
+        "filter": [">", ["get", "measuredHeight"], h],
+        "paint": {
+          "fill-extrusion-color": h % 6 === 0 ? "#008000" : "#000000",
+          "fill-extrusion-height": h,
+          "fill-extrusion-base": h,
+          "fill-extrusion-opacity": 0.75
+        }
+      });
+    }
+
+    new maplibregl.Map({
+      "container": "map",
+      "center": [139.677879, 35.647049],
+      "zoom": 17.35,
+      "pitch": 51,
+      "bearing": 18.7,
+      "hash": true,
+      "style": style
+    });
+  </script>
+</body>
+
+</html>

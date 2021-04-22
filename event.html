@@ -3,10 +3,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>plateau-building</title>
+  <title>plateau-building event</title>
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.css" />
   <script src="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.js"></script>
+  <style>
+    .my-popup b {
+      background: orange;
+      border: 1px solid black;
+      color: black;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -14,7 +22,7 @@
   <script>
     const base = new URL("./", location.href).toString().replace(/\/$/, "");
 
-    new maplibregl.Map({
+    const map = new maplibregl.Map({
       "container": "map",
       "center": [139.677879, 35.647049],
       "zoom": 17.35,
@@ -64,6 +72,29 @@
           }
         }]
       }
+    });
+
+
+    // When a click event occurs on a feature in the places layer, open a popup at the
+    // location of the feature, with description HTML from its properties.
+    map.on('click', 'bldg', function(e) {
+      const dl = document.createElement("dl");
+      const prop = e.features[0].properties;
+      const html = "<div class='my-popup'>" + Object.keys(prop).map(k => `<b>${k}</b> <span>${prop[k]}</span>`).join("<br/>") + "</div>"
+      new maplibregl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(html)
+        .addTo(map);
+    });
+
+    // Change the cursor to a pointer when the mouse is over the places layer.
+    map.on('mouseenter', 'bldg', function() {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'bldg', function() {
+      map.getCanvas().style.cursor = '';
     });
   </script>
 </body>

@@ -7,6 +7,8 @@
 
 <https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/>
 
+[![plateau-tokyo23ku-building-mvt-2020](https://repository-images.githubusercontent.com/357730702/111d3b00-c2f0-11eb-9899-7658407cfcee)](https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/)
+
 # タイル仕様
 
 URL         | <https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/{z}/{x}/{y}.pbf>
@@ -112,12 +114,14 @@ LOD0 (地形モデルレベル) の情報であることに注意してくださ
 
 ## tippecanoe
 
-本データセットは CityGML から生成した GeoJSON Text Sequences を以下のコマンドラインで MVT に変換したものです。
+本データセットは CityGML から独自に生成した GeoJSON Text Sequences を [tippecanoe](https://github.com/mapbox/tippecanoe) で MVT に変換したものです。
+
+tippecanoe に設定したオプションは以下の通りです。
 
 ```
-$ time bzcat geojson.bz2 | tippecanoe --no-tile-compression -ad -an -Z10 -z16 -e dist -l bldg -ai
+$ bzcat geojson.bz2 | tippecanoe --no-tile-compression -ad -an -Z10 -z16 -e dist -l bldg -ai
 ```
 
 ## maplibre
 
-デモページは maplibre を使っています。
+デモページでの MVT の表示には [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) を使っています。

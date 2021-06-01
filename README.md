@@ -43,7 +43,7 @@ LOD0 (地形モデルレベル) の情報であることに注意してくださ
 
 ソースの CityGML が以下のようなデータ構造であった場合、
 
-```sample.gml
+```xml
 <bldg:Building gml:id="BLD_26482c83-174c-4892-8899-e1574353a3cf">
   <gen:stringAttribute name="建物ID">
     <gen:value>13108-bldg-154</gen:value>
@@ -77,12 +77,12 @@ LOD0 (地形モデルレベル) の情報であることに注意してくださ
 
 以下のような GeoJSON properties が構成されます。
 
-```
+```json
 {
   "type" : "Feature",
   "geometry" : {
     "type" : "Polygon",
-    "coordinates" : [...]
+    "coordinates" : []
   },
   "properties" : {
     "建物ID" : "13108-bldg-154",
@@ -118,10 +118,10 @@ LOD0 (地形モデルレベル) の情報であることに注意してくださ
 
 tippecanoe に設定したオプションは以下の通りです。
 
-```
+```sh
 $ bzcat geojson.bz2 | tippecanoe --no-tile-compression -ad -an -Z10 -z16 -e dist -l bldg -ai
 ```
 
-## maplibre
+## maplibre-gl-js
 
 デモページでの MVT の表示には [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) を使っています。

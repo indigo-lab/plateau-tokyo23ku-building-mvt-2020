@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>example-gsibv</title>
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@1.14.0/dist/maplibre-gl.js"></script>
+</head>
+
+<body>
+  <div id="map" style="position:absolute;top:0;left:0;bottom:0;right:0;"></div>
+  <script>
+    fetch("https://gsi-cyberjapan.github.io/gsivectortile-mapbox-gl-js/std.json").then(res => res.json()).then(style => {
+
+      style.sources.plateau = {
+        "type": "vector",
+        "tiles": [
+          "https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/{z}/{x}/{y}.pbf"
+        ],
+        "minzoom": 10,
+        "maxzoom": 16,
+        "attribution": "<a href='https://www.mlit.go.jp/plateau/'>国土交通省 Project PLATEAU</a> のデータを加工して作成"
+      };
+
+      style.layers = [].concat(
+        style.layers.filter(a => a.type !== "symbol"), {
+          "id": "bldg",
+          "type": "fill-extrusion",
+          "source": "plateau",
+          "source-layer": "bldg",
+          "minzoom": 10,
+          "maxzoom": 20,
+          "paint": {
+            "fill-extrusion-color": "rgba(255,187,153,1)",
+            "fill-extrusion-height": ["*", 1.0, ["get", "measuredHeight"]]
+          }
+        },
+        style.layers.filter(a => a.type === "symbol")
+      );
+
+      new maplibregl.Map({
+        "container": "map",
+        "center": [139.68786, 35.68355],
+        "zoom": 14.65,
+        "pitch": 60,
+        "bearing": 22,
+        "hash": true,
+        "style": style
+      });
+    });
+  </script>
+</body>
+
+</html>

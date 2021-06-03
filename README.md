@@ -5,9 +5,21 @@
 
 # デモ
 
+## index.html
+
+データの確認を目的としたデモです。建物をクリックすることで属性情報がポップアップ表示されます。
+
 <https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/>
 
 [![plateau-tokyo23ku-building-mvt-2020](https://repository-images.githubusercontent.com/357730702/111d3b00-c2f0-11eb-9899-7658407cfcee)](https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/)
+
+## example-gsivb.html
+
+[地理院地図Vector](https://github.com/gsi-cyberjapan/gsimaps-vector-experiment) を併用したデモです。
+
+<https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/example-gsibv.html>
+
+[![example-gsibv.html](https://user-images.githubusercontent.com/8913051/120594099-63d72e00-c47b-11eb-82fe-13d2157f8e20.jpg)](https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/example-gsibv.html)
 
 # タイル仕様
 

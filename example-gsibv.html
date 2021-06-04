@@ -79,6 +79,17 @@
         source: "h",
         "exaggeration": 3
       };
+      
+      style.fog = {
+        range: [2, 12],
+        color: [
+          "rgb",
+          255,
+          255,
+          255
+        ],
+        "horizon-blend": 0.1
+      };
 
       mapboxgl.accessToken = 'pk.eyJ1IjoiaGZ1IiwiYSI6ImlRSGJVUTAifQ.rTx380smyvPc1gUfZv1cmw';
       map = new mapboxgl.Map({
@@ -89,11 +100,6 @@
         "bearing": 22,
         "hash": true,
         "style": style
-      });
-      map.setFog({
-        range: [2, 12],
-        color: 'white',
-        "horizon-blend": 0.1
       });
     });
   </script>

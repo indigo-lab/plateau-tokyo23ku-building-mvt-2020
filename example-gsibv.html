@@ -81,7 +81,7 @@
       };
 
       mapboxgl.accessToken = 'pk.eyJ1IjoiaGZ1IiwiYSI6ImlRSGJVUTAifQ.rTx380smyvPc1gUfZv1cmw';
-      new mapboxgl.Map({
+      map = new mapboxgl.Map({
         "container": "map",
         "center": [139.68786, 35.68355],
         "zoom": 14.65,
@@ -89,6 +89,11 @@
         "bearing": 22,
         "hash": true,
         "style": style
+      });
+      map.setFog({
+        range: [2, 12],
+        color: 'white',
+        "horizon-blend": 0.1
       });
     });
   </script>

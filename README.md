@@ -13,7 +13,7 @@
 
 [![plateau-tokyo23ku-building-mvt-2020](https://repository-images.githubusercontent.com/357730702/111d3b00-c2f0-11eb-9899-7658407cfcee)](https://indigo-lab.github.io/plateau-tokyo23ku-building-mvt-2020/)
 
-## example-gsivb.html
+## example-gsibv.html
 
 [地理院地図Vector](https://github.com/gsi-cyberjapan/gsimaps-vector-experiment) を併用したデモです。
 

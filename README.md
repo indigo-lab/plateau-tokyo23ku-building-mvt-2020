@@ -103,8 +103,8 @@ LOD0 (地形モデルレベル) の情報であることに注意してくださ
     "13_区市町村コード_大字・町コード_町・丁目コード" : "13108044003",
     "江東内部河川流域洪水浸水想定区域（想定最大規模）>規模" : "L2",
     "江東内部河川流域洪水浸水想定区域（想定最大規模）>浸水ランク" : "1",
-    "江東内部河川流域洪水浸水想定区域（想定最大規模）>浸水深" : "0.437",
-    "measuredHeight" : "4.9"    
+    "江東内部河川流域洪水浸水想定区域（想定最大規模）>浸水深" : 0.437,
+    "measuredHeight" : 4.9
   }
 }
 ```
@@ -137,3 +137,15 @@ $ bzcat geojson.bz2 | tippecanoe --no-tile-compression -ad -an -Z10 -z16 -e dist
 ## maplibre-gl-js
 
 デモページでの MVT の表示には [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js) を使っています。
+
+# 更新履歴
+
+## 2021-06-02
+
+- 初版公開
+
+## 2021-06-23
+
+- CityGML においてプロパティの値が明示的に数値である場合、MVT では string として float としてエンコードされるように変更
+- uro:buildingRoofEdgeArea の値をプロパティとして保持するように変更
+- uro:buildingRoofEdgeArea が設定されていない場合はジオメトリから計算して補完
